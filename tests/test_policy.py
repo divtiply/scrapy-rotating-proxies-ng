@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from scrapy.http import Response, Request
 from rotating_proxies.policy import BanDetectionPolicy
 import pytest

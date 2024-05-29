@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from rotating_proxies.expire import Proxies, exp_backoff
 
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from scrapy.exceptions import IgnoreRequest
 
 
