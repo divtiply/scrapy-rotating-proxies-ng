@@ -4,8 +4,7 @@ import logging
 import math
 import random
 import time
-
-import attr
+from dataclasses import dataclass, field
 
 from .utils import extract_proxy_hostport
 
@@ -143,11 +142,11 @@ class Proxies:
         )
 
 
-@attr.s
+@dataclass
 class ProxyState:
-    failed_attempts = attr.ib(default=0)
-    next_check = attr.ib(default=None)
-    backoff_time = attr.ib(default=None)  # for debugging
+    failed_attempts: ... = field(default=0)
+    next_check: ... = field(default=None)
+    backoff_time: ... = field(default=None)  # for debugging
 
 
 def exp_backoff(attempt, cap=3600, base=300):

@@ -27,9 +27,7 @@ setup(
     description="Rotating proxies for Scrapy",
     url="https://github.com/TeamHG-Memex/scrapy-rotating-proxies",
     packages=find_packages(exclude=["tests"]),
-    install_requires=[
-        "attrs > 16.0.0",
-    ],
+    install_requires=[],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "License :: OSI Approved :: MIT License",
