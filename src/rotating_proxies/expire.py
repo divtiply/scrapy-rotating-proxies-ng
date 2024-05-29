@@ -12,7 +12,7 @@ from .utils import extract_proxy_hostport
 logger = logging.getLogger(__name__)
 
 
-class Proxies(object):
+class Proxies:
     """
     Expiring proxies container.
 
@@ -144,7 +144,7 @@ class Proxies(object):
 
 
 @attr.s
-class ProxyState(object):
+class ProxyState:
     failed_attempts = attr.ib(default=0)
     next_check = attr.ib(default=None)
     backoff_time = attr.ib(default=None)  # for debugging

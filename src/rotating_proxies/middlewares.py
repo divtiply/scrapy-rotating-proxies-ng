@@ -3,12 +3,12 @@ from __future__ import absolute_import
 import codecs
 import logging
 from functools import partial
+from urllib.parse import urlsplit
 
 from scrapy import signals
 from scrapy.exceptions import CloseSpider, NotConfigured
 from scrapy.utils.misc import load_object
 from scrapy.utils.url import add_http_if_no_scheme
-from six.moves.urllib.parse import urlsplit
 from twisted.internet import task
 
 from .expire import Proxies, exp_backoff_full_jitter
@@ -16,7 +16,7 @@ from .expire import Proxies, exp_backoff_full_jitter
 logger = logging.getLogger(__name__)
 
 
-class RotatingProxyMiddleware(object):
+class RotatingProxyMiddleware:
     """
     Scrapy downloader middleware which choses a random proxy for each request.
 
@@ -227,7 +227,7 @@ class RotatingProxyMiddleware(object):
         )
 
 
-class BanDetectionMiddleware(object):
+class BanDetectionMiddleware:
     """
     Downloader middleware for detecting bans. It adds
     '_ban': True to request.meta if the response was a ban.
@@ -259,7 +259,7 @@ class BanDetectionMiddleware(object):
             def response_is_ban(self, request, response):
                 # use default rules, but also consider HTTP 200 responses
                 # a ban if there is 'captcha' word in response body.
-                ban = super(MyPolicy, self).response_is_ban(request, response)
+                ban = super().response_is_ban(request, response)
                 ban = ban or b'captcha' in response.body
                 return ban
 

@@ -1,7 +1,7 @@
 from scrapy.exceptions import IgnoreRequest
 
 
-class BanDetectionPolicy(object):
+class BanDetectionPolicy:
     """Default ban detection rules."""
 
     NOT_BAN_STATUSES = {200, 301, 302}
