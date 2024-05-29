@@ -1,9 +1,9 @@
-from scrapy.http import Response, Request
-from rotating_proxies.policy import BanDetectionPolicy
 import pytest
+from scrapy.http import Request, Response
 
+from rotating_proxies.policy import BanDetectionPolicy
 
-request = Request('http://example.com')
+request = Request("http://example.com")
 
 
 @pytest.fixture()
@@ -16,27 +16,26 @@ def get_response(**kwargs):
 
 
 def test_default_ban_policy(policy):
-    resp = get_response(body=b'hello')
+    resp = get_response(body=b"hello")
     assert policy.response_is_ban(request, resp) is False
 
-    resp = get_response(body=b'hello', status=302)
+    resp = get_response(body=b"hello", status=302)
     assert policy.response_is_ban(request, resp) is False
 
-    resp = get_response(body=b'hello', status=500)
+    resp = get_response(body=b"hello", status=500)
     assert policy.response_is_ban(request, resp) is True
 
 
 def test_default_ban_policy_empty_body(policy):
-    resp = get_response(body=b'')
+    resp = get_response(body=b"")
     assert policy.response_is_ban(request, resp) is True
 
-    resp = get_response(body=b'', status=301)
+    resp = get_response(body=b"", status=301)
     assert policy.response_is_ban(request, resp) is False
 
-    resp = get_response(body=b'', status=500)
+    resp = get_response(body=b"", status=500)
     assert policy.response_is_ban(request, resp) is True
 
 
 def test_default_ban_policy_exception(policy):
     assert policy.exception_is_ban(request, ValueError()) is True
-
