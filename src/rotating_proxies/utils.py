@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from urllib.request import _parse_proxy
 
 
