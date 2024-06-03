@@ -89,7 +89,7 @@ You can override ban detection method by passing a path to
 a custom BanDetectionPolicy in ``ROTATING_PROXY_BAN_POLICY`` option, e.g.::
 
     # settings.py
-    ROTATING_PROXY_BAN_POLICY = 'myproject.policy.MyBanPolicy'
+    ROTATING_PROXY_BAN_POLICY = "myproject.policy.MyBanPolicy"
 
 The policy must be a class with ``response_is_ban``
 and ``exception_is_ban`` methods. These methods can return True
@@ -99,12 +99,13 @@ to subclass and modify default BanDetectionPolicy::
     # myproject/policy.py
     from rotating_proxies.policy import BanDetectionPolicy
 
+
     class MyPolicy(BanDetectionPolicy):
         def response_is_ban(self, request, response):
             # use default rules, but also consider HTTP 200 responses
             # a ban if there is 'captcha' word in response body.
             ban = super().response_is_ban(request, response)
-            ban = ban or b'captcha' in response.body
+            ban = ban or b"captcha" in response.body
             return ban
 
         def exception_is_ban(self, request, exception):
@@ -118,7 +119,7 @@ and ``exception_is_ban`` methods as spider methods, for example::
         # ...
 
         def response_is_ban(self, request, response):
-            return b'banned' in response.body
+            return b"banned" in response.body
 
         def exception_is_ban(self, request, exception):
             return None

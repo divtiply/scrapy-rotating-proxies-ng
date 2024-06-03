@@ -25,8 +25,8 @@ class RotatingProxyMiddleware:
 
         DOWNLOADER_MIDDLEWARES = {
             # ...
-            'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
-            'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
+            "rotating_proxies.middlewares.RotatingProxyMiddleware": 610,
+            "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
             # ...
         }
 
@@ -218,13 +218,11 @@ class RotatingProxyMiddleware:
     @classmethod
     def cleanup_proxy_list(cls, proxy_list):
         lines = [line.strip() for line in proxy_list]
-        return list(
-            {
-                add_http_if_no_scheme(url)
-                for url in lines
-                if url and not url.startswith("#")
-            }
-        )
+        return list({
+            add_http_if_no_scheme(url)
+            for url in lines
+            if url and not url.startswith("#")
+        })
 
 
 class BanDetectionMiddleware:
@@ -236,7 +234,7 @@ class BanDetectionMiddleware:
 
         DOWNLOADER_MIDDLEWARES = {
             # ...
-            'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
+            "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
             # ...
         }
 
@@ -245,7 +243,7 @@ class BanDetectionMiddleware:
     passing a path to a custom BanDetectionPolicy in
     ``ROTATING_PROXY_BAN_POLICY``, e.g.::
 
-    ROTATING_PROXY_BAN_POLICY = 'myproject.policy.MyBanPolicy'
+    ROTATING_PROXY_BAN_POLICY = "myproject.policy.MyBanPolicy"
 
     The policy must be a class with ``response_is_ban``
     and ``exception_is_ban`` methods. These methods can return True
@@ -255,12 +253,13 @@ class BanDetectionMiddleware:
         # myproject/policy.py
         from rotating_proxies.policy import BanDetectionPolicy
 
+
         class MyPolicy(BanDetectionPolicy):
             def response_is_ban(self, request, response):
                 # use default rules, but also consider HTTP 200 responses
                 # a ban if there is 'captcha' word in response body.
                 ban = super().response_is_ban(request, response)
-                ban = ban or b'captcha' in response.body
+                ban = ban or b"captcha" in response.body
                 return ban
 
             def exception_is_ban(self, request, exception):
@@ -274,7 +273,7 @@ class BanDetectionMiddleware:
             # ...
 
             def response_is_ban(self, request, response):
-                return b'banned' in response.body
+                return b"banned" in response.body
 
             def exception_is_ban(self, request, exception):
                 return None
