@@ -40,7 +40,8 @@ def test_reanimate_reset():
     p.mark_dead("foo", 1000)
     p.mark_dead("bar", 1)
     p.mark_dead("baz", 1)
-    assert not p.good and not p.unchecked
+    assert not p.good
+    assert not p.unchecked
     n_reanimated = p.reanimate(1000)
     assert n_reanimated == 2
     assert all(proxy.failed_attempts > 0 for proxy in p.proxies.values())
