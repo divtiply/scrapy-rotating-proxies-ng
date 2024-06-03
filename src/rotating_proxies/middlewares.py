@@ -92,7 +92,7 @@ class RotatingProxyMiddleware:
         else:
             proxy_list = s.getlist("ROTATING_PROXY_LIST")
         if not proxy_list:
-            raise NotConfigured()
+            raise NotConfigured
         mw = cls(
             proxy_list=proxy_list,
             logstats_interval=s.getfloat("ROTATING_PROXY_LOGSTATS_INTERVAL", 30),
@@ -135,7 +135,7 @@ class RotatingProxyMiddleware:
             if self.stop_if_no_proxies:
                 raise CloseSpider("no_proxies")
             else:
-                logger.warn("No proxies available; marking all proxies " "as unchecked")
+                logger.warning("No proxies available; marking all proxies as unchecked")
                 self.proxies.reset()
                 proxy = self.proxies.get_random()
                 if proxy is None:
@@ -211,7 +211,7 @@ class RotatingProxyMiddleware:
             )
 
     def log_stats(self):
-        logger.info("%s" % self.proxies)
+        logger.info("%s", self.proxies)
 
     @classmethod
     def cleanup_proxy_list(cls, proxy_list):
@@ -302,7 +302,7 @@ class BanDetectionMiddleware:
         ban = is_ban(request, response)
         request.meta["_ban"] = ban
         if ban:
-            self.stats.inc_value("bans/status/%s" % response.status)
+            self.stats.inc_value(f"bans/status/{response.status}")
             if not len(response.body):
                 self.stats.inc_value("bans/empty")
         return response
@@ -311,9 +311,8 @@ class BanDetectionMiddleware:
         is_ban = getattr(spider, "exception_is_ban", self.policy.exception_is_ban)
         ban = is_ban(request, exception)
         if ban:
-            ex_class = "%s.%s" % (
-                exception.__class__.__module__,
-                exception.__class__.__name__,
+            ex_class = (
+                f"{exception.__class__.__module__}.{exception.__class__.__name__}"
             )
-            self.stats.inc_value("bans/error/%s" % ex_class)
+            self.stats.inc_value(f"bans/error/{ex_class}")
         request.meta["_ban"] = ban

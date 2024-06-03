@@ -64,13 +64,13 @@ class Proxies:
     def mark_dead(self, proxy, _time=None):
         """Mark a proxy as dead"""
         if proxy not in self.proxies:
-            logger.warn("Proxy <%s> was not found in proxies list" % proxy)
+            logger.warning("Proxy <%s> was not found in proxies list", proxy)
             return
 
         if proxy in self.good:
-            logger.debug("GOOD proxy became DEAD: <%s>" % proxy)
+            logger.debug("GOOD proxy became DEAD: <%s>", proxy)
         else:
-            logger.debug("Proxy <%s> is DEAD" % proxy)
+            logger.debug("Proxy <%s> is DEAD", proxy)
 
         self.unchecked.discard(proxy)
         self.good.discard(proxy)
@@ -85,11 +85,11 @@ class Proxies:
     def mark_good(self, proxy):
         """Mark a proxy as good"""
         if proxy not in self.proxies:
-            logger.warn("Proxy <%s> was not found in proxies list" % proxy)
+            logger.warning("Proxy <%s> was not found in proxies list", proxy)
             return
 
         if proxy not in self.good:
-            logger.debug("Proxy <%s> is GOOD" % proxy)
+            logger.debug("Proxy <%s> is GOOD", proxy)
 
         self.unchecked.discard(proxy)
         self.dead.discard(proxy)
@@ -129,14 +129,13 @@ class Proxies:
     def __str__(self):
         n_reanimated = len(self.reanimated)
         return (
-            "Proxies(good: {}, dead: {}, unchecked: {}, reanimated: {}, "
-            "mean backoff time: {}s)".format(
-                len(self.good),
-                len(self.dead),
-                len(self.unchecked) - n_reanimated,
-                n_reanimated,
-                int(self.mean_backoff_time),
-            )
+            "Proxies("
+            f"good: {len(self.good)}, "
+            f"dead: {len(self.dead)}, "
+            f"unchecked: {len(self.unchecked) - n_reanimated}, "
+            f"reanimated: {n_reanimated}, "
+            f"mean backoff time: {int(self.mean_backoff_time)}s"
+            ")"
         )
 
 
