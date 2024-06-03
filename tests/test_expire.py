@@ -54,13 +54,13 @@ def test_reanimate_reset():
 
 
 def test_exp_backoff():
-    assert exp_backoff(0, 3600.0, 300.0) == 300
-    assert exp_backoff(1, 3600.0, 300.0) == 600
-    assert exp_backoff(2, 3600.0, 300.0) == 1200
-    assert exp_backoff(3, 3600.0, 300.0) == 2400
-    assert exp_backoff(4, 3600.0, 300.0) == 3600
-    assert exp_backoff(10, 3600.0, 300.0) == 3600
+    assert exp_backoff(0, 3600, 300) == 300
+    assert exp_backoff(1, 3600, 300) == 600
+    assert exp_backoff(2, 3600, 300) == 1200
+    assert exp_backoff(3, 3600, 300) == 2400
+    assert exp_backoff(4, 3600, 300) == 3600
+    assert exp_backoff(10, 3600, 300) == 3600
 
 
 def test_exp_backoff_overflow():
-    assert exp_backoff(100000, 3600.0, 300.0) == 3600
+    assert exp_backoff(100000, 3600, 300) == 3600
