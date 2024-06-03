@@ -55,7 +55,7 @@ class Proxies:
     def get_proxy(self, proxy_address):
         """
         Return complete proxy name associated with a hostport of a given
-        ``proxy_address``. If ``proxy_address`` is unkonwn or empty,
+        ``proxy_address``. If ``proxy_address`` is unknown or empty,
         return None.
         """
         if not proxy_address:

@@ -68,7 +68,7 @@ Concurrency
 -----------
 
 By default, all default Scrapy concurrency options (``DOWNLOAD_DELAY``,
-``AUTHTHROTTLE_...``, ``CONCURRENT_REQUESTS_PER_DOMAIN``, etc) become
+``AUTOTHROTTLE_...``, ``CONCURRENT_REQUESTS_PER_DOMAIN``, etc) become
 per-proxy for proxied requests when RotatingProxyMiddleware is enabled.
 For example, if you set ``CONCURRENT_REQUESTS_PER_DOMAIN=2`` then
 spider will be making at most 2 concurrent connections to each proxy,
@@ -86,7 +86,7 @@ if a response status code is not 200, response body is empty or if
 there was an exception then proxy is considered dead.
 
 You can override ban detection method by passing a path to
-a custom BanDectionPolicy in ``ROTATING_PROXY_BAN_POLICY`` option, e.g.::
+a custom BanDetectionPolicy in ``ROTATING_PROXY_BAN_POLICY`` option, e.g.::
 
     # settings.py
     ROTATING_PROXY_BAN_POLICY = 'myproject.policy.MyBanPolicy'

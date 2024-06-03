@@ -38,7 +38,7 @@ class RotatingProxyMiddleware:
     Dead proxies are re-checked with a randomized exponential backoff.
 
     By default, all default Scrapy concurrency options (DOWNLOAD_DELAY,
-    AUTHTHROTTLE_..., CONCURRENT_REQUESTS_PER_DOMAIN, etc) become per-proxy
+    AUTOTHROTTLE_..., CONCURRENT_REQUESTS_PER_DOMAIN, etc) become per-proxy
     for proxied requests when RotatingProxyMiddleware is enabled.
     For example, if you set CONCURRENT_REQUESTS_PER_DOMAIN=2 then
     spider will be making at most 2 concurrent connections to each proxy.
@@ -242,7 +242,7 @@ class BanDetectionMiddleware:
 
     By default, client is considered banned if a request failed, and alive
     if a response was received. You can override ban detection method by
-    passing a path to a custom BanDectionPolicy in
+    passing a path to a custom BanDetectionPolicy in
     ``ROTATING_PROXY_BAN_POLICY``, e.g.::
 
     ROTATING_PROXY_BAN_POLICY = 'myproject.policy.MyBanPolicy'
