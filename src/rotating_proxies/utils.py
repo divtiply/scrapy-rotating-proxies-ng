@@ -1,9 +1,8 @@
-from urllib.request import _parse_proxy
+from urllib.request import _parse_proxy  # type: ignore
 
 
-def extract_proxy_hostport(proxy):
-    """
-    Return the hostport component from a given proxy:
+def extract_proxy_hostport(proxy: str) -> str:
+    """Return the hostport component from a given proxy.
 
     >>> extract_proxy_hostport("example.com")
     'example.com'

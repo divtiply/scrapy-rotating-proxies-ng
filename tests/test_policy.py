@@ -1,11 +1,13 @@
 import pytest
+from scrapy.http.request import Request
+from scrapy.http.response import Response
+
 from rotating_proxies.policy import BanDetectionPolicy
-from scrapy.http import Request, Response
 
 request = Request("http://example.com")
 
 
-@pytest.fixture()
+@pytest.fixture
 def policy():
     return BanDetectionPolicy()
 
