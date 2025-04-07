@@ -1,0 +1,250 @@
+[project]
+name = "scrapy-rotating-proxies-ng"
+version = "0.7.0"
+description = "Rotating proxies for Scrapy"
+authors = [{ name = "Mikhail Korobov", email = "kmike84@gmail.com" }]
+maintainers = [{ name = "Michel Ace", email = "divtiply@gmail.com" }]
+readme = "README.rst"
+license = "MIT"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Framework :: Scrapy",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+requires-python = ">=3.9"
+dependencies = [ #
+    "scrapy>=2.10",
+    "typing-extensions>=4.10.0",
+]
+
+[project.urls]
+source = "https://github.com/divtiply/scrapy-rotating-proxies-ng"
+
+[dependency-groups]
+dev = [ #
+    { include-group = "test" },
+]
+test = ["pytest>=8.3.5", "pytest-cov>=6.1.0"]
+
+
+[tool.pytest.ini_options]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--doctest-modules",
+    "--cov",
+    "--cov-branch",
+    "--cov-report=term",
+    "--cov-report=html",
+    "--cov-report=lcov",
+]
+doctest_optionflags = [ #
+    "NORMALIZE_WHITESPACE",
+    "ELLIPSIS",
+]
+testpaths = [ #
+    "src",
+    "tests",
+]
+
+
+[tool.coverage.run]
+parallel = true
+branch = true
+source = [ #
+    "src",
+]
+omit = [ #
+    "test_*.py",
+    "*_test.py",
+]
+
+[tool.coverage.html]
+directory = "coverage/htmlcov"
+
+[tool.coverage.lcov]
+output = "coverage/lcov.info"
+
+
+[tool.pyright]
+pythonVersion = "3.9"
+include = [ #
+    "src",
+    "tests",
+]
+# venvPath = "."
+# venv = ".venv"
+
+
+[tool.ruff]
+target-version = "py39"
+include = [ #
+    "pyproject.toml",
+    "src/**/*.py",
+    "tests/**/*.py",
+    "scripts/**/*.py",
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = [
+    "AIR",   # airflow
+    "ERA",   # eradicate
+    "FAST",  # fast-api
+    "YTT",   # flake8-2020
+    "ANN",   # flake8-annotations
+    "ASYNC", # flake8-async
+    "S",     # flake8-bandit
+    "BLE",   # flake8-blind-except
+    "FBT",   # flake8-boolean-trap
+    "B",     # flake8-bugbear
+    "A",     # flake8-builtins
+    "COM",   # flake8-commas
+    "C4",    # flake8-comprehensions
+    # "CPY", # flake8-copyright
+    "DTZ",  # flake8-datetimez
+    "T10",  # flake8-debugger
+    "DJ",   # flake8-django
+    "EM",   # flake8-errmsg
+    "EXE",  # flake8-executable
+    "FIX",  # flake8-fixme
+    "FA",   # flake8-future-annotations
+    "INT",  # flake8-gettext
+    "ISC",  # flake8-implicit-str-concat
+    "ICN",  # flake8-import-conventions
+    "LOG",  # flake8-logging
+    "G",    # flake8-logging-format
+    "INP",  # flake8-no-pep420
+    "PIE",  # flake8-pie
+    "T20",  # flake8-print
+    "PYI",  # flake8-pyi
+    "PT",   # flake8-pytest-style
+    "Q",    # flake8-quotes
+    "RSE",  # flake8-raise
+    "RET",  # flake8-return
+    "SLF",  # flake8-self
+    "SIM",  # flake8-simplify
+    "SLOT", # flake8-slots
+    "TID",  # flake8-tidy-imports
+    "TD",   # flake8-todos
+    "TC",   # flake8-type-checking
+    "ARG",  # flake8-unused-arguments
+    "PTH",  # flake8-use-pathlib
+    "FLY",  # flynt
+    "I",    # isort
+    "C90",  # mccabe
+    "NPY",  # numpy
+    "PD",   # pandas-vet
+    "N",    # pep8-naming
+    "PERF", # perflint
+    "E",    # pycodestyle
+    "W",    # pycodestyle-warnings
+    # "DOC", # pydoclint
+    "D",    # pydocstyle
+    "F",    # pyflakes
+    "PGH",  # pygrep-hooks
+    "PL",   # pylint
+    "UP",   # pyupgrade
+    "FURB", # refurb
+    "RUF",  # ruff-specific
+    "TRY",  # tryceratops
+]
+ignore = [
+    "PGH003", # blanket-type-ignore
+    "PGH004", # blanket-noqa
+    "TD001",  # invalid-todo-tag
+    "TD002",  # missing-todo-author
+    "TD003",  # missing-todo-link
+    "COM812", # missing-trailing-comma
+    "COM819", # prohibited-trailing-comma
+    "D100",   # undocumented-public-module
+    "D101",   # undocumented-public-class
+    "D102",   # undocumented-public-method
+    "D104",   # undocumented-public-package
+    "D105",   # undocumented-magic-method
+    "D106",   # undocumented-public-nested-class
+    "D107",   # undocumented-public-init
+    "D203",   # incorrect-blank-line-before-class
+    "D213",   # multi-line-summary-second-line
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403", "F405"]
+"{test_*.py,*_test.py}" = ["D", "ANN", "S101", "PLR2004", "SLF"]
+"tests/**" = ["INP001"]
+
+# [tool.ruff.lint.pydocstyle]
+# # convention = "google"  # Accepts: "google", "numpy", or "pep257".
+
+# [tool.ruff.lint.flake8-type-checking]
+# runtime-evaluated-base-classes = ["scrapy.spiders.Spider"]
+
+
+[tool.tox]
+requires = [ #
+    "tox>=4.25.0",
+    "tox-uv>=1.25.0",
+]
+env_list = [ #
+    "3.13",
+    "3.12",
+    "3.11",
+    "3.10",
+    "3.9",
+    "clean",
+    "report",
+]
+skip_missing_interpreters = true
+
+[tool.tox.env_run_base]
+description = "run the tests with pytest under {env_name}"
+package = "wheel"
+wheel_build_env = ".pkg"
+dependency_groups = [ #
+    "test",
+]
+pass_env = ["PYTEST_*", "SSL_CERT_FILE"]
+set_env.COVERAGE_FILE = { replace = "env", name = "COVERAGE_FILE", default = "{work_dir}{/}.coverage.{env_name}" }
+commands = [ #
+    ["pytest", { replace = "posargs", extend = true }],
+]
+
+[tool.tox.env.clean]
+skip_install = true
+dependency_groups = [ #
+    "test",
+]
+commands = [ #
+    ["coverage", "erase"],
+]
+
+[tool.tox.env.report]
+depends = ["3.13", "3.12", "3.11", "3.10", "3.9"]
+skip_install = true
+dependency_groups = [ #
+    "test",
+]
+set_env.COVERAGE_FILE = { replace = "env", name = "COVERAGE_FILE", default = "{work_dir}{/}.coverage" }
+commands = [ #
+    ["coverage", "combine"],
+    ["coverage", "report"],
+    ["coverage", "html"],
+]
+
+
+[tool.bumpversion]
+current_version = "0.7.0"
+
+
+[tool.towncrier]
+name = "scrapy-rotating-proxies-ng"
