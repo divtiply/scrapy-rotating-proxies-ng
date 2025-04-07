@@ -1,6 +1,16 @@
 CHANGES
 =======
 
+0.7.0 (2025-04-07)
+------------------
+
+``scrapy-rotating-proxies-ng`` fork:
+
+* dropped Python 2 support
+* switched to ``uv`` package and project manager
+* removed ``typing`` package dependency
+* added type annotations
+
 0.6.2 (2019-05-25)
 ------------------
 
